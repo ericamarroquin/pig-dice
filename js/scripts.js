@@ -1,7 +1,7 @@
 //Business Logic
 
 function roll() {
-  const min = Math.ceil(0);
+  const min = Math.ceil(1);
   const max = Math.floor(7);
   return Math.floor(Math.random() * (max-min) + min);
 }
@@ -22,16 +22,17 @@ Player.prototype.play = function() {
   }
 }
 
+Player.prototype.winner = function() {
+  if (this.totalScore >= 100) {
+    console.log("Winner!")
+  }
+}
+
 Player.prototype.hold = function() {
   this.totalScore += this.tempScore
   this.tempScore = 0;
   this.turn += 1;
-}
-
-Player.prototype.winner = function() {
-  if (this.totalScore >= 100) {
-    
-  }
+  this.winner();
 }
 
 //UI Logic
