@@ -14,4 +14,14 @@ Describe: play(number);
 Test:"If a player rolls anything else but 1"
 Code: play()
 Expected Output: 2, 3, 4, 5, or 6
+
+Describe: hold()
+Test:"If a player decides to hold, current numbers will be counted"
+Code:
+Expected Output:
+
+Describe: 
+Test: 
+Code:
+Expected Output:
 ```
