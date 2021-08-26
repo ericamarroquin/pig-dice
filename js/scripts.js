@@ -17,16 +17,18 @@ Player.prototype.play = function() {
   const playerRoll = roll();
   if (playerRoll === 1) {
     this.tempScore = 0;
+    this.hold();
     alert("Oops, you rolled a one!");
   } else {
     this.tempScore += playerRoll;
+    this.rolls += 1;
   }
-  this.rolls += 1;
+  return playerRoll;
 }
 
 Player.prototype.winner = function() {
   if (this.totalScore >= 100) {
-    console.log("Winner!")
+    alert("Winner!")
   }
 }
 
@@ -43,17 +45,35 @@ $(document).ready(function() {
   $("button#start").click(function(event) {
     event.preventDefault();
     let player1 = new Player();
-    console.log(player1);
+    let player2 = new Player();
+    
+
     $("button#roll").click(function(event) {
       event.preventDefault();
-      player1.play();
-      $("#totalRolls").text(player1.rolls);
-      console.log(player1);
+      let diceRoll = player1.play();
+      $("#totalRolls").text(diceRoll);
+      $("#tempScore").text(player1.tempScore);
     })
+
+    $("button#roll-2").click(function(event) {
+      event.preventDefault();
+      let diceRoll = player2.play();
+      $("#totalRolls-2").text(diceRoll);
+      $("#tempScore-2").text(player2.tempScore);
+    })
+
     $("button#hold").click(function(event) {
       event.preventDefault();
       player1.hold();
-      console.log(player1);
+      $("#finalScore").text(player1.totalScore);
+      $("#player1-controls").hide();
+      $("#player2-controls").show();
+    })
+
+    $("button#hold-2").click(function(event) {
+      event.preventDefault();
+      player2.hold();
+      $("#finalScore-2").text(player2.totalScore);
     })
   })
 });
