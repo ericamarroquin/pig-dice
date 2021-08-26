@@ -10,6 +10,7 @@ function Player() {
   this.tempScore = 0;
   this.totalScore = 0;
   this.turn = 0;
+  this.rolls = 0;
 };
 
 Player.prototype.play = function() {
@@ -20,6 +21,7 @@ Player.prototype.play = function() {
   } else {
     this.tempScore += playerRoll;
   }
+  this.rolls += 1;
 }
 
 Player.prototype.winner = function() {
@@ -32,6 +34,7 @@ Player.prototype.hold = function() {
   this.totalScore += this.tempScore
   this.tempScore = 0;
   this.turn += 1;
+  this.rolls = 0;
   this.winner();
 }
 
@@ -44,6 +47,7 @@ $(document).ready(function() {
     $("button#roll").click(function(event) {
       event.preventDefault();
       player1.play();
+      $("#totalRolls").text(player1.rolls);
       console.log(player1);
     })
     $("button#hold").click(function(event) {
