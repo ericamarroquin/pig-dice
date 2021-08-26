@@ -1,7 +1,15 @@
-#player1-controls {
+.player1-controls {
   display: none;
 }
 
-#player2-controls {
+.player2-controls {
   display: none;
+}
+
+.game-type-buttons {
+  display: none;
+}
+
+.h2 {
+  text-align: center;
 }

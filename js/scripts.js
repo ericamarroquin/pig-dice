@@ -11,6 +11,7 @@ function Player() {
   this.totalScore = 0;
   this.turn = 0;
   this.rolls = 0;
+  this.currentPlayer = true;
 };
 
 Player.prototype.play = function() {
@@ -40,40 +41,63 @@ Player.prototype.hold = function() {
   this.winner();
 }
 
+Player.prototype.computer = function() {
+  if (this.rolls === 2) {
+    this.hold();
+  }
+  this.play();
+}
+
 //UI Logic
 $(document).ready(function() {
   $("button#start").click(function(event) {
     event.preventDefault();
-    let player1 = new Player();
-    let player2 = new Player();
-    
+    $(".game-type-buttons").show();
+    $("#two-player").click(function(event) {
+      $("#computer").hide();
+      let player1 = new Player();
+      let player2 = new Player();
+      const p1Controls = $(".player1-controls");
+      const p2Controls = $(".player2-controls");
+      p1Controls.show();
 
-    $("button#roll").click(function(event) {
-      event.preventDefault();
-      let diceRoll = player1.play();
-      $("#totalRolls").text(diceRoll);
-      $("#tempScore").text(player1.tempScore);
-    })
+      $("button#roll").click(function(event) {
+        event.preventDefault();
+        let diceRoll = player1.play();
+        $("#totalRolls").text(diceRoll);
+        $("#tempScore").text(player1.tempScore);
+        if (diceRoll === 1) {
+          p1Controls.hide();
+          p2Controls.show();
+        }
+      })
 
-    $("button#roll-2").click(function(event) {
-      event.preventDefault();
-      let diceRoll = player2.play();
-      $("#totalRolls-2").text(diceRoll);
-      $("#tempScore-2").text(player2.tempScore);
-    })
+      $("button#roll-2").click(function(event) {
+        event.preventDefault();
+        let diceRoll = player2.play();
+        $("#totalRolls-2").text(diceRoll);
+        $("#tempScore-2").text(player2.tempScore);
+        if (diceRoll === 1) {
+          p2Controls.hide();
+          p1Controls.show();
+        }
+      })
 
-    $("button#hold").click(function(event) {
-      event.preventDefault();
-      player1.hold();
-      $("#finalScore").text(player1.totalScore);
-      $("#player1-controls").hide();
-      $("#player2-controls").show();
-    })
+      $("button#hold").click(function(event) {
+        event.preventDefault();
+        player1.hold();
+        $("#finalScore").text(player1.totalScore);
+        p1Controls.hide();
+        p2Controls.show();
+      })
 
-    $("button#hold-2").click(function(event) {
-      event.preventDefault();
-      player2.hold();
-      $("#finalScore-2").text(player2.totalScore);
+      $("button#hold-2").click(function(event) {
+        event.preventDefault();
+        player2.hold();
+        $("#finalScore-2").text(player2.totalScore);
+        p2Controls.hide();
+        p1Controls.show();
+      })
     })
   })
 });
