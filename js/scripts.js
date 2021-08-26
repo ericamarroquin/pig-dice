@@ -41,24 +41,31 @@ Player.prototype.hold = function() {
   this.winner();
 }
 
-Player.prototype.computer = function() {
-  if (this.rolls === 2) {
-    this.hold();
-  }
-  this.play();
-}
+// Player.prototype.computer = function() {
+//   let interval = setInterval(function() {
+//     if (this.rolls >= 3) {
+//       this.hold();
+//       clearInterval(interval)
+//     } else {
+//       this.play();
+//     }
+//   },
+//   2000);
+// }
+
+
 
 //UI Logic
 $(document).ready(function() {
   $("button#start").click(function(event) {
     event.preventDefault();
     $(".game-type-buttons").show();
+    const p1Controls = $(".player1-controls");
+    const p2Controls = $(".player2-controls");
     $("#two-player").click(function(event) {
       $("#computer").hide();
       let player1 = new Player();
       let player2 = new Player();
-      const p1Controls = $(".player1-controls");
-      const p2Controls = $(".player2-controls");
       p1Controls.show();
 
       $("button#roll").click(function(event) {
@@ -99,5 +106,30 @@ $(document).ready(function() {
         p1Controls.show();
       })
     })
+
+    // $("#computer").click(function(event) {
+    //   let player1 = new Player();
+    //   let computerPlayer = new Player();
+    //   p1Controls.show();
+    //   $("#two-player").hide();
+
+    //   $("button#roll").click(function(event) {
+    //     event.preventDefault();
+    //     let diceRoll = player1.play();
+    //     $("#totalRolls").text(diceRoll);
+    //     $("#tempScore").text(player1.tempScore);
+    //     if (diceRoll === 1) {
+    //       p1Controls.hide();
+    //       // computerPlayer.computer();
+    //     }
+    //   })
+    //   $("button#hold").click(function(event) {
+    //     event.preventDefault();
+    //     player1.hold();
+    //     $("#finalScore").text(player1.totalScore);
+    //     p1Controls.hide();
+    //     // computerPlayer.computer();
+    //   })
+    // })
   })
 });

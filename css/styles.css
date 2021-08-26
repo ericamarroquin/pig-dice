@@ -13,3 +13,7 @@
 .h2 {
   text-align: center;
 }
+body {
+  background-image: ("file:///Users/tajofisher/Downloads/cool-background.png");
+  background-size: cover;
+}
